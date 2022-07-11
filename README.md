@@ -19,6 +19,7 @@ This project contains README document only with the steps I used to Create Priva
    from my webserver execute
    nslookup ip-172-31-94-110  hostname of registry server
    
+   ~~~~sh
    ubuntu@ip-172-31-16-60:~$ nslookup ip-172-31-94-110
    Server:         127.0.0.53
    Address:        127.0.0.53#53
@@ -26,15 +27,17 @@ This project contains README document only with the steps I used to Create Priva
    Non-authoritative answer:
    Name:   ip-172-31-94-110.ec2.internal
    Address: 172.31.94.110
-
+   ~~~~
 
 
 
    similarly
+   
    ssh -i ~/.ssh/keys/aws_ec2_gitlab_key.pem ubuntu@3.86.145.0  - registry server
    from registry server execute
    nslookup ip-172-31-16-60 hostname of my web server
 
+   ~~~~sh
    ubuntu@ip-172-31-94-110:~$ nslookup ip-172-31-16-60
    Server:         127.0.0.53
    Address:        127.0.0.53#53
@@ -42,6 +45,7 @@ This project contains README document only with the steps I used to Create Priva
    Non-authoritative answer:
    Name:   ip-172-31-16-60.ec2.internal
    Address: 172.31.16.60
+   ~~~~
 
 
 ## install docker on each server
@@ -119,7 +123,10 @@ https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non
    (b) copy the ssh key on 'my webserver' location could be ~/.ssh/keys/aws_ec2_gitlab_key.pem
        sudo chmod 400 aws_ec2_gitlab_key.pem
 
-   (c) sudo scp -i ~/.ssh/keys/aws_ec2_gitlab_key.pem ubuntu@3.86.145.0:/home/ubuntu/registry/certs/domain.crt /etc/docker/certs.d/ip-172-31-94-110:443
+   (c) 
+   ~~~~sh
+   sudo scp -i ~/.ssh/keys/aws_ec2_gitlab_key.pem ubuntu@3.86.145.0:/home/ubuntu/registry/certs/domain.crt /etc/docker/certs.d/ip-172-31-94-110:443
+   ~~~~
 
    (d) finally verify
        docker login ip-172-31-94-110:443
